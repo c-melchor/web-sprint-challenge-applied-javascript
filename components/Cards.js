@@ -1,3 +1,5 @@
+import { log } from "util";
+
 // STEP 3: Create article cards.
 // -----------------------
 // Send an HTTP GET request to the following address: https://lambda-times-api.herokuapp.com/articles
@@ -24,6 +26,7 @@
 const articleHolderDiv = document.querySelector('.cards-container')
 
 function articleCard(artObj){
+    console.log(artObj);
     const cardDiv = document.createElement('div');
     const headlineDiv = document.createElement('div');
     const authorDiv = document.createElement('div');
@@ -42,22 +45,18 @@ function articleCard(artObj){
     authorDiv.appendChild(authorName);
     imgDiv.appendChild(imgSrc);
 
-    // headlineDiv.textContent = ;
-    authorDiv.textContent = `author div here`;
-    authorName.textContent = `By: christina melchor`
+    headlineDiv.textContent = artObj.headline;
+    authorName.textContent = `By: ${artObj.authorName}`
+    imgSrc.src = artObj.authorPhoto;
 
     cardDiv.addEventListener('click', () => {
         console.log(headlineDiv.textContent)
-        //CLICK EVENT WORKS 8:50AM
     })
     // imgDiv.src =
 
     return cardDiv;
 }
 
-articleHolderDiv.appendChild(articleCard());
-// console.log(articleHolderDiv); THIS IS WORKING 8:50AM
-// console.log(articleCard()); THIS IS WORKING 8:50AM
 
 
 
@@ -66,7 +65,9 @@ axios.get('https://lambda-times-api.herokuapp.com/articles')
     console.log(result)
         const objValues = Object.values(result.data.articles);
         objValues.forEach( item =>{
+            // console.log(item)
             item.forEach( element =>{
+                // console.log(element)
                 const newArticle = articleCard(element);
                 articleHolderDiv.appendChild(newArticle);
             }) 
