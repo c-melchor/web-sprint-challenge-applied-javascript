@@ -23,8 +23,8 @@ function Header() {
     date.classList.add('date');
     temperature.classList.add('temp');
 
-    bigDiv.appendChild(headerEl);
     bigDiv.appendChild(date);
+    bigDiv.appendChild(headerEl);
     bigDiv.appendChild(temperature);
   
     return bigDiv
