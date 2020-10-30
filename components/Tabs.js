@@ -19,7 +19,6 @@ axios.get('https://lambda-times-api.herokuapp.com/topics')
         const tabDiv = document.createElement('div');
         tabDiv.classList.add('tab'); 
         tabDiv.textContent = item
-        // console.log('THIS IS WORKING*****', tabDiv) 
         tabParent.appendChild(tabDiv);
     });
 })
