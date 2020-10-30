@@ -23,6 +23,10 @@ function Header() {
     date.classList.add('date');
     temperature.classList.add('temp');
 
+    date.textContent = `MARCH 28, 2020`;
+    headerEl.textContent =`Lambda Times`;
+    temperature.textContent = `98°`
+
     bigDiv.appendChild(date);
     bigDiv.appendChild(headerEl);
     bigDiv.appendChild(temperature);
