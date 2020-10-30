@@ -42,10 +42,11 @@ function articleCard(artObj){
     authorDiv.appendChild(authorName);
     imgDiv.appendChild(imgSrc);
 
-    headlineDiv.textContent='testing testing'
-    
+    // headlineDiv.textContent=`${artObj.headline}`;
+
     cardDiv.addEventListener('click', () => {
         console.log(headlineDiv.textContent)
+        //CLICK EVENT WORKS 8:50AM
     })
     // imgDiv.src =
 
@@ -53,5 +54,23 @@ function articleCard(artObj){
 }
 
 articleHolderDiv.appendChild(articleCard());
-console.log(articleHolderDiv);
-// console.log(articleCard());
+// console.log(articleHolderDiv); THIS IS WORKING 8:50AM
+// console.log(articleCard()); THIS IS WORKING 8:50AM
+
+
+
+axios.get('https://lambda-times-api.herokuapp.com/articles')
+.then(result => {
+    console.log(result)
+    // for(let i = 0; i < 6; i++){
+        const keys = Object.keys(result.data.articles);
+    keys.forEach(element => {
+        const newArticle = articleCard(element);
+        articleHolderDiv.appendChild(newArticle);
+        console.log(newArticle);
+    });
+// }
+})
+.catch(nope => {
+console.log('help not working', nope)
+})
