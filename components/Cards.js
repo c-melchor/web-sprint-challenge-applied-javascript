@@ -1,3 +1,5 @@
+import { log } from "util";
+
 // STEP 3: Create article cards.
 // -----------------------
 // Send an HTTP GET request to the following address: https://lambda-times-api.herokuapp.com/articles
@@ -20,3 +22,57 @@
 // Add a listener for click events so that when a user clicks on a card, the headline of the article is logged to the console.
 //
 // Use your function to create a card for each of the articles, and append each card to the DOM.
+
+const articleHolderDiv = document.querySelector('.cards-container')
+
+function articleCard(artObj){
+    console.log(artObj);
+    const cardDiv = document.createElement('div');
+    const headlineDiv = document.createElement('div');
+    const authorDiv = document.createElement('div');
+    const imgDiv = document.createElement('div');
+    const imgSrc = document.createElement('img');
+    const authorName = document.createElement('span');
+
+    cardDiv.classList.add('card');
+    headlineDiv.classList.add('headline');
+    authorDiv.classList.add('author');
+    imgDiv.classList.add('img-container');
+
+    cardDiv.appendChild(headlineDiv);
+    cardDiv.appendChild(authorDiv);
+    authorDiv.appendChild(imgDiv);
+    authorDiv.appendChild(authorName);
+    imgDiv.appendChild(imgSrc);
+
+    headlineDiv.textContent = artObj.headline;
+    authorName.textContent = `By: ${artObj.authorName}`
+    imgSrc.src = artObj.authorPhoto;
+
+    cardDiv.addEventListener('click', () => {
+        console.log(headlineDiv.textContent)
+    })
+    // imgDiv.src =
+
+    return cardDiv;
+}
+
+
+
+
+axios.get('https://lambda-times-api.herokuapp.com/articles')
+.then(result => {
+    console.log(result)
+        const objValues = Object.values(result.data.articles);
+        objValues.forEach( item =>{
+            // console.log(item)
+            item.forEach( element =>{
+                // console.log(element)
+                const newArticle = articleCard(element);
+                articleHolderDiv.appendChild(newArticle);
+            }) 
+        })
+    })
+.catch(nope => {
+console.log('help not working', nope)
+})
